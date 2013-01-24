@@ -6,7 +6,7 @@ Description: Wraps Instabuilder's countdown shortcode so a date can be "injected
 Version: 0.1
 Author: Scott Lesovic
 Author Email: scott@guilefulmagic.com
-License:
+License: GPLv2
 
   Copyright 2013 Scott Lesovic (scott@guilefulmagic.com)
 
@@ -45,11 +45,8 @@ class AS_InstaBuilder_Countdown_Helper {
     public static function &init() {
         if ( ! self::$instance ) {
             self::$instance = new self();
-            self::$instance->constants();
             self::$instance->setup_globals();
-            self::$instance->includes();
             self::$instance->setup_actions();
-            self::$instance->load_components();
         }
 
         return self::$instance;
@@ -63,6 +60,76 @@ class AS_InstaBuilder_Countdown_Helper {
     * @since 0.1
     */
     private function __construct() {}
+
+    public function setup_actions() {
+        add_action( 'init', array( $this, 'merge_request' ), 0 );
+        add_action( 'init', array( $this, 'register_shortcode' ), 0 );
+    }
+
+    private function setup_globals() {
+        $this->get  = ( isset( $_GET ) ) ? $_GET : array();
+        $this->post = ( isset( $_POST ) ) ? $_POST : array();
+    }
+
+    public function merge_request() {
+        $get = $this->get;
+        $post = $this->post;
+
+        $use_first = apply_filters( 'asibch_use_first', 'POST' );
+
+        switch ( $use_first ) {
+            case 'GET':
+                $request = array_merge( $post, $get );
+                break;
+            case 'POST':
+                $request = array_merge( $get, $post );
+                break;
+            default:
+                $request = array();
+                break;
+        }
+
+        $this->request = $request;
+    }
+
+    public function register_shortcode() {
+        add_shortcode( 'as_countdown', array( &$this, 'shortcode_cb') );
+    }
+
+    public function shortcode_cb( $atts, $content = null, $tag = 'as_countdown' ) {
+        $request = $this->request;
+
+        extract( shortcode_atts( array(
+            'field' => 'ndate',
+            'style' => 'dark',
+            'timezone' => '',
+            'redirect' => ''
+            ), $atts ) );
+
+        if ( isset( $request[$field] ) && !empty( $request[$field] ) ) {
+            $date = DateTime::createFromFormat('m/d/Y', $request[$field] );
+        } else {
+            $date = new DateTime;
+            $date->add(new DateInterval('P1D'));
+        }
+
+        $day = $date->format('d');
+        $month = $date->format('m');
+        $year = $date->format('Y');
+
+        $ez_countdown = '[ez_countdown ';
+        $ez_countdown .= 'day="' . $day . '" ';
+        $ez_countdown .= 'month="' . $month . '" ';
+        $ez_countdown .= 'year="' . $year . '" ';
+        $ez_countdown .= 'hour="0" ';
+        $ez_countdown .= 'min="0" ';
+        $ez_countdown .= 'sec="0" ';
+        $ez_countdown .= 'style="' . $style . '" ';
+        $ez_countdown .= 'timezone="' . $timezone . '" ';
+        $ez_countdown .= 'redirect="' . $redirect . '" /]';
+
+        return do_shortcode( $ez_countdown );
+    }
 
 
 }
