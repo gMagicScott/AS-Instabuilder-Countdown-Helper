@@ -7,6 +7,10 @@ Stable tag: 0.1
 
 Wraps Instabuilder's countdown shortcode so a date can be "injected" from $_GET or $POST
 
+Useage:
+`[as_countdown field="ndate"]`
+`timezone=""`, `style=""`, and `redirect=""` are optional.
+
 
 == Installation ==
 
