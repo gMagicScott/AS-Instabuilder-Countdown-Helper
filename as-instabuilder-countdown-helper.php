@@ -3,7 +3,7 @@
 Plugin Name: AS Instabuilder Countdown Helper
 Plugin URI: http://www.amazingsystem.com
 Description: Wraps Instabuilder's countdown shortcode so a date can be "injected" from $_GET or $POST
-Version: 0.1
+Version: 0.2
 Author: Scott Lesovic
 Author Email: scott@guilefulmagic.com
 License: GPLv2
