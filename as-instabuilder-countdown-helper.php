@@ -152,7 +152,7 @@ class AS_InstaBuilder_Countdown_Helper {
 }
 
 /**
-* The main function responsible for returning the Commons In A Box instance
+* The main function responsible for returning the AS_InstaBuilder_Countdown_Helper instance
 * to functions everywhere.
 *
 * Use this function like you would a global variable, except without needing
