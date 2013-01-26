@@ -103,11 +103,12 @@ class AS_InstaBuilder_Countdown_Helper {
             'field' => 'ndate',
             'style' => 'dark',
             'timezone' => '',
-            'redirect' => ''
+            'redirect' => '',
+            'date_format' => 'm/d/Y'
             ), $atts ) );
 
         if ( isset( $request[$field] ) && !empty( $request[$field] ) ) {
-            $date = DateTime::createFromFormat('m/d/Y', $request[$field] );
+            $date = DateTime::createFromFormat( $date_format, $request[$field] );
             if ( !$date ) {
                 return ( current_user_can( 'edit_pages' ) ) ? '<strong class="error">Invalid Date Format for Countdown</strong>' : '' ;
             }
