@@ -15,7 +15,7 @@ Other fields:
 - **timezone**: defaults to 0. You may need this depending on you webserver's time
 - **redirect**: defaults to null. Use a URL to redirect page when timer hits zero
 - **date_format**: defaults to m/d/Y. See [PHP Date Docs](http://php.net/manual/en/function.date.php) for more formats.
-- **date_offset**: defaults to false. See [PHP Date Offset Docs]() for valid formats.
+- **date_offset**: defaults to false. See [PHP Date Offset Docs](http://php.net/manual/en/dateinterval.construct.php) for valid formats.
 - **neg_date_offset**: defaults to false. Make true to offset negative days since *date_offset* can only accept positive integers.
 
 If there is an error, logged in admins will see the message "Invalid Date Format for Countdown" where the countdown should be. Others will see nothing.
