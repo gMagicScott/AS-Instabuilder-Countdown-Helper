@@ -104,13 +104,23 @@ class AS_InstaBuilder_Countdown_Helper {
             'style' => 'dark',
             'timezone' => '',
             'redirect' => '',
-            'date_format' => 'm/d/Y'
+            'date_format' => 'm/d/Y',
+            'date_offset' => false,
+            'neg_date_offset' => false
             ), $atts ) );
 
         if ( isset( $request[$field] ) && !empty( $request[$field] ) ) {
             $date = DateTime::createFromFormat( $date_format, $request[$field] );
             if ( !$date ) {
                 return ( current_user_can( 'edit_pages' ) ) ? '<strong class="error">Invalid Date Format for Countdown</strong>' : '' ;
+            }
+
+            if ( $date_offset ) {
+                $offset_object = new DateInterval( $date_offset );
+                if ( $neg_date_offset ) {
+                    $offset_object->invert = 1;
+                }
+                $date->add( $offset_object );
             }
         } else {
             $date = new DateTime;
