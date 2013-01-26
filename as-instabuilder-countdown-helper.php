@@ -130,14 +130,17 @@ class AS_InstaBuilder_Countdown_Helper {
         $day = $date->format('d');
         $month = $date->format('m');
         $year = $date->format('Y');
+        $hour = $date->format('H');
+        $minute = $date->format('Y');
+        $second = $date->format('Y');
 
         $ez_countdown = '[ez_countdown ';
         $ez_countdown .= 'day="' . $day . '" ';
         $ez_countdown .= 'month="' . $month . '" ';
         $ez_countdown .= 'year="' . $year . '" ';
-        $ez_countdown .= 'hour="0" ';
-        $ez_countdown .= 'min="0" ';
-        $ez_countdown .= 'sec="0" ';
+        $ez_countdown .= 'hour="' . $hour . '" ';
+        $ez_countdown .= 'min="' . $minute . '" ';
+        $ez_countdown .= 'sec="' . $second . '" ';
         $ez_countdown .= 'style="' . $style . '" ';
         $ez_countdown .= 'timezone="' . $timezone . '" ';
         $ez_countdown .= 'redirect="' . $redirect . '" /]';
