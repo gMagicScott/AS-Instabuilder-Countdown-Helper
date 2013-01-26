@@ -1,11 +1,11 @@
 # AS Instabuilder Countdown Helper #
-Contributors: [gMagicScott](http://profiles.wordpress.org/gMagicScott/)
-Tags: instabuilder, amazing system
-Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 0.2
+- **Contributors**: [gMagicScott](http://profiles.wordpress.org/gMagicScott/)
+- **Tags**: instabuilder, amazing system
+- **Requires at least**: 3.0
+- **Tested up to**: 3.5
+- **Stable tag**: 0.2
 
-Wraps Instabuilder's countdown shortcode so a date can be "injected" from $_GET or $POST
+Wraps InstaBuilder's countdown shortcode so a date can be "injected" from `$_GET` or `$POST`
 
 ## Useage: ##
 `[as_countdown field="ndate"]`
