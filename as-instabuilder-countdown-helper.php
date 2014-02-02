@@ -102,7 +102,7 @@ class AS_InstaBuilder_Countdown_Helper {
         extract( shortcode_atts( array(
             'field' => 'ndate',
             'style' => 'dark',
-            'timezone' => get_option('gmt_offset');,
+            'timezone' => get_option('gmt_offset'),
             'redirect' => '',
             'date_format' => 'm/d/Y',
             'date_offset' => false,
