@@ -3,7 +3,7 @@
 Plugin Name: AS Instabuilder Countdown Helper
 Plugin URI: http://www.amazingsystem.com
 Description: Wraps Instabuilder's countdown shortcode so a date can be "injected" from $_GET or $POST
-Version: 0.2
+Version: 0.2.1
 Author: Scott Lesovic
 Author Email: scott@guilefulmagic.com
 License: GPLv2
@@ -102,12 +102,12 @@ class AS_InstaBuilder_Countdown_Helper {
         extract( shortcode_atts( array(
             'field' => 'ndate',
             'style' => 'dark',
-            'timezone' => '',
+            'timezone' => get_option('gmt_offset');,
             'redirect' => '',
             'date_format' => 'm/d/Y',
             'date_offset' => false,
             'neg_date_offset' => false
-            ), $atts ) );
+            ), $atts, 'as_countdown' ) );
 
         if ( isset( $request[$field] ) && !empty( $request[$field] ) ) {
             $date = DateTime::createFromFormat( $date_format, $request[$field] );
@@ -138,9 +138,6 @@ class AS_InstaBuilder_Countdown_Helper {
         $ez_countdown .= 'day="' . $day . '" ';
         $ez_countdown .= 'month="' . $month . '" ';
         $ez_countdown .= 'year="' . $year . '" ';
-        $ez_countdown .= 'hour="' . $hour . '" ';
-        $ez_countdown .= 'min="' . $minute . '" ';
-        $ez_countdown .= 'sec="' . $second . '" ';
         $ez_countdown .= 'style="' . $style . '" ';
         $ez_countdown .= 'timezone="' . $timezone . '" ';
         $ez_countdown .= 'redirect="' . $redirect . '" /]';
