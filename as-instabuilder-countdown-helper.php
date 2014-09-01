@@ -3,7 +3,7 @@
 Plugin Name: AS Instabuilder Countdown Helper
 Plugin URI: http://www.amazingsystem.com
 Description: Wraps Instabuilder's countdown shortcode so a date can be "injected" from $_GET or $POST
-Version: 0.2.1
+Version: 0.2.2
 Author: Scott Lesovic
 Author Email: scott@guilefulmagic.com
 License: GPLv2
@@ -27,6 +27,17 @@ License: GPLv2
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
+
+// Ensure minimum PHP version
+if ( version_compare( PHP_VERSION, '5.3', '<' ) ) {
+	if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
+		require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		deactivate_plugins( __FILE__ );
+		wp_die( 'AS Instabuilder Countdown Helper requires PHP 5.3 or higher. The plugin has now disabled itself. The most recent PHP version is <strong><code>5.6.0</code></strong>. You should talk to your web host about upgrading.'  );
+	} else {
+		return;
+	}
+}
 
 /**
 * Primary Plugin Class
